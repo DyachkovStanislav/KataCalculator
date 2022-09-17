@@ -1,8 +1,9 @@
+import Exceptions.InvalidFormatException;
 import Exceptions.RomanNegativeNumberException;
 
 import java.util.InputMismatchException;
 
-public  class ConverterCalc {
+public class ConverterCalc {
 
     public static int romanToNumber(String roman) {
         try {
@@ -53,46 +54,50 @@ public  class ConverterCalc {
     }
 
 
-        public static class Calculator {
+    public static class Calculator {
 
-            public static int calculated(int num1, int num2, char op) {
-                int result = 0;
-                switch (op) {
-                    case '+':
-                        result = num1 + num2;
-                        break;
-                    case '-':
-                        result = num1 - num2;
-                        break;
-                    case '*':
-                        result = num1 * num2;
-                        break;
-                    case '/':
-                        try {
-                            result = num1 / num2;
-                        } catch (ArithmeticException | InputMismatchException e) {
-                            System.out.println("Exception : " + e);
-                            System.out.println("Only integer non-zero parameters allowed");
+        public static int calculated(int num1, int num2, char op) {
+            int result = 0;
+            switch (op) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    try {
+                        result = num1 / num2;
+                    } catch (ArithmeticException | InputMismatchException e) {
+                        System.out.println("Exception : " + e);
+                        System.out.println("Only integer non-zero parameters allowed");
 
-                            break;
-                        }
                         break;
-                    default:
-                        throw new IllegalArgumentException("Invalid operation sign");
-                }
-                return result;
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid operation sign");
             }
+            return result;
         }
+    }
+
     public static boolean isNumeric(String string) {
         int intValue;
 
         try {
             intValue = Integer.parseInt(string);
-            return true;
+            if (intValue > 0 && intValue <= 10) {return true;}
+            else {
+                throw new InvalidFormatException(" you have numbers 1 to 10 and not negative");
+            }
         } catch (NumberFormatException e) {
             return false;
         }
 
     }
-    }
+}
 
