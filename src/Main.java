@@ -19,21 +19,26 @@ public class Main extends ConverterCalc {
     }
 
     public static String calc(String input) {
-        char[] newChar = new char[10];
-        for (int i = 0; i < input.length(); i++) {
-            newChar[i] = input.charAt(i);
-            if (newChar[i] == '+') {
-                operation = '+';
+        char[] newChar = new char[5];
+        try {
+            for (int i = 0; i < input.length(); i++) {
+                newChar[i] = input.charAt(i);
+                if (newChar[i] == '+') {
+                    operation = '+';
+                }
+                if (newChar[i] == '-') {
+                    operation = '-';
+                }
+                if (newChar[i] == '*') {
+                    operation = '*';
+                }
+                if (newChar[i] == '/') {
+                    operation = '/';
+                }
             }
-            if (newChar[i] == '-') {
-                operation = '-';
-            }
-            if (newChar[i] == '*') {
-                operation = '*';
-            }
-            if (newChar[i] == '/') {
-                operation = '/';
-            }
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new InvalidFormatException("Invalid expression format! correct format: " +
+                    "[1 + 1] and numbers from 1 to 10 not negative");
         }
         String under_charString = String.valueOf(newChar);
         String[] symbols = under_charString.split(" ");
